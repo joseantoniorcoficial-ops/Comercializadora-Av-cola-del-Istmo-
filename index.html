@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>CAI - Notas de Venta</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+            },
+            colors: {
+              background: '#FFFFFF',
+              surface: '#FFFFFF',
+              primary: '#1E293B', 
+              accent: '#3B82F6',
+            },
+            boxShadow: {
+              'soft': '0 10px 40px -10px rgba(0,0,0,0.08)',
+              'soft-hover': '0 20px 40px -10px rgba(0,0,0,0.12)',
+              'inner-soft': 'inset 0 2px 4px 0 rgba(0, 0, 0, 0.03)',
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      body {
+        /* Soft Blue-Gray Background per request */
+        background-color: #E2E8F0; 
+        color: #1E293B;
+        overflow-x: hidden;
+      }
+
+      /* --- SOFT UI CARD --- */
+      .soft-card {
+          background: #FFFFFF;
+          border-radius: 24px;
+          box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.06);
+          border: 1px solid #F1F5F9;
+      }
+
+      /* --- INPUTS --- */
+      label {
+          color: #475569;
+          font-weight: 600;
+          font-size: 0.85rem;
+          margin-bottom: 6px;
+          display: block;
+          text-transform: uppercase;
+          letter-spacing: 0.025em;
+      }
+
+      input, select, textarea {
+          color: #0F172A !important;
+          /* Default bg, overridden by specific classes inline */
+          background: #F8FAFC; 
+          border: 1px solid transparent !important;
+          border-radius: 12px !important;
+          padding: 12px 16px !important;
+          font-size: 1rem !important;
+          font-weight: 600 !important;
+          width: 100%;
+          transition: all 0.2s ease;
+      }
+
+      input:focus, select:focus, textarea:focus {
+          background: #FFFFFF !important;
+          border-color: #3B82F6 !important;
+          outline: none !important;
+          box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1) !important;
+      }
+
+      /* --- BUTTONS --- */
+      /* Primary: Solid, Rounded, Shadow */
+      .btn-primary {
+          /* Background color is set via utility classes for different buttons */
+          color: white;
+          border-radius: 16px;
+          padding: 14px 24px;
+          font-weight: 700;
+          font-size: 0.95rem;
+          border: none;
+          box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+          transition: all 0.2s ease;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 8px;
+          cursor: pointer;
+      }
+      .btn-primary:hover {
+          transform: translateY(-2px);
+          filter: brightness(110%);
+          box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+      }
+      .btn-primary:active {
+          transform: translateY(1px);
+          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Secondary: Outline, Pill, No Shadow */
+      .btn-secondary {
+          background-color: transparent;
+          color: #475569;
+          border: 2px solid #CBD5E1;
+          border-radius: 9999px; /* Pill shape */
+          padding: 10px 20px;
+          font-weight: 600;
+          font-size: 0.9rem;
+          transition: all 0.2s ease;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 8px;
+          cursor: pointer;
+      }
+      .btn-secondary:hover {
+          border-color: #94A3B8;
+          color: #1E293B;
+          background-color: #F8FAFC;
+      }
+      
+      /* Specific Action Colors */
+      .btn-action-new { background-color: #3B82F6; }
+      .btn-action-export { background-color: #EF4444; }
+      .btn-action-report { background-color: #F59E0B; }
+      
+      /* Top Buttons Colors */
+      .btn-top-new { background-color: #3B82F6; }      /* Blue */
+      .btn-top-user { background-color: #475569; }     /* Slate */
+      .btn-top-exit { background-color: #EF4444; }     /* Red */
+
+      /* --- PDF FIXES --- */
+      .pdf-container {
+          width: 816px;
+          min-height: 1056px;
+          padding: 40px;
+          font-family: 'Inter', sans-serif;
+          background: #FFF;
+      }
+      /* Ensure inputs don't look weird in PDF */
+      .pdf-container input {
+          background: transparent !important;
+          border: none !important;
+          padding: 0 !important;
+      }
+
+      /* --- MEDIA QUERIES --- */
+      @media (max-width: 768px) {
+          body { padding-bottom: 40px; }
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react": "https://esm.sh/react@^19.2.3",
+    "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "html2canvas": "https://esm.sh/html2canvas@^1.4.1",
+    "jspdf": "https://esm.sh/jspdf@^3.0.4",
+    "jszip": "https://esm.sh/jszip@3.10.1",
+    "file-saver": "https://esm.sh/file-saver@2.0.5"
+  }
+}
+</script>
+</head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>

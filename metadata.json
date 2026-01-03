@@ -1,0 +1,7 @@
+{
+  "name": "CAI - Notas de Venta",
+  "description": "Sistema de gestión de ventas CAI con control de usuarios, bitácora y reportes avanzados.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}
